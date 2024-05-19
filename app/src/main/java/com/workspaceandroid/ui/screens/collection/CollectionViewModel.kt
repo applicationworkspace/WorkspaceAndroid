@@ -40,11 +40,11 @@ class CollectionViewModel @Inject constructor(
 
     private fun updateExpandedCards(selectedPhrase: Phrase) {
         setState {
-            val updatedCards = viewState.value.phrases.map { //TODO refactor
+            val updatedCards = viewState.value.selectedPhrases.map { //TODO refactor
                 if (it.id == selectedPhrase.id) it.copy(isExpanded = !it.isExpanded)
                 else it
             }.toMutableList()
-            copy(phrases = updatedCards)
+            copy(selectedPhrases = updatedCards)
         }
     }
 
@@ -56,7 +56,7 @@ class CollectionViewModel @Inject constructor(
 
     fun onCollectionSelected(collection: UserCollection) {
         val phrasesFromCollection = allCollections.firstOrNull { it.id == collection.id }?.phrases
-        setState { copy(phrases = phrasesFromCollection ?: emptyList()) }
+        setState { copy(selectedPhrases = phrasesFromCollection ?: emptyList()) }
     }
 
     private fun fetchUserCollection() {
@@ -65,7 +65,7 @@ class CollectionViewModel @Inject constructor(
             setState {
                 copy(
                     allCollections = allCollections,
-                    phrases = allCollections.flatMap { it.phrases },
+                    selectedPhrases = allCollections.flatMap { it.phrases },
                     isLoading = false
                 )
             }
@@ -80,7 +80,7 @@ class CollectionViewModel @Inject constructor(
             .flatMap { it.phrases }
             .filter { it.id != phraseId }
         setState {
-            copy(phrases = phrasesWithoutDeleted, isLoading = false)
+            copy(selectedPhrases = phrasesWithoutDeleted, isLoading = false)
         }
     }
 
@@ -94,7 +94,7 @@ class CollectionViewModel @Inject constructor(
                     phrase.copy(isDone = false).takeIf { phrase.id == phraseId } ?: phrase
                 }
             setState {
-                copy(phrases = updatedPhrases)
+                copy(selectedPhrases = updatedPhrases)
             }
         }
     }

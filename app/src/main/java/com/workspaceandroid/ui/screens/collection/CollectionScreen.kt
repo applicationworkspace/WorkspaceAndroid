@@ -131,7 +131,7 @@ fun CollectionScreen(
                         SearchBox(onSearch)
                     }
 
-                    items(state.phrases) { phrase ->
+                    items(state.selectedPhrases) { phrase ->
                         ExpandableCard(
                             phrase = phrase,
                             onCardClick = { onItemClick(phrase) },
@@ -195,7 +195,7 @@ fun ExpandableCard(
     ) {
         Column(Modifier.padding(top = offset_8, start = offset_8, end = offset_8)) {
             Box(modifier = Modifier.noRippleClickable { onCardClick() }) {
-                CardTitle(phrase.text, phrase.isDone)
+                CardTitle(phrase.text, phrase.isDone, phrase.)
                 CardArrow(
                     modifier = Modifier.align(Alignment.TopEnd),
                     degrees = arrowRotationDegree,
@@ -223,7 +223,7 @@ fun CardArrow(
 }
 
 @Composable
-fun CardTitle(title: String, isDone: Boolean) {
+fun CardTitle(title: String, isDone: Boolean, categories: List<String>) {
     Column {
         if (isDone) Icon(Icons.Filled.Done, contentDescription = "Done icon")
         Text(
@@ -242,7 +242,7 @@ fun CardTitle(title: String, isDone: Boolean) {
             )
         ) {
 
-            items(1) {
+            items(item) {
                 CustomChipTitle(text = "Finance", color = blue.copy(alpha = 0.4f))
                 Spacer(modifier = Modifier.width(offset_4))
                 CustomChipTitle(text = "Macroeconomics", color = orange.copy(alpha = 0.4f))
@@ -483,7 +483,7 @@ fun CollectionScreenPreview() {
                     phrases = emptyList()
                 )
             ),
-            phrases = listOf(
+            selectedPhrases = listOf(
                 Phrase(
                     id = 1L,
                     createdAt = 1L,
