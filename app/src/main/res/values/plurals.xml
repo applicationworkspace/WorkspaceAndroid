@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="collections">
+        <item quantity="zero">колекцій</item>
+        <item quantity="one">колекція</item>
+        <item quantity="two">колекції</item>
+        <item quantity="few">колекції</item>
+        <item quantity="many">колекцій</item>
+        <item quantity="other">колекцій</item>
+    </plurals>
+
+    <plurals name="words">
+        <item quantity="zero">слів</item>
+        <item quantity="one">слово</item>
+        <item quantity="two">слова</item>
+        <item quantity="few">слова</item>
+        <item quantity="many">слів</item>
+        <item quantity="other">слів</item>
+    </plurals>
+</resources>

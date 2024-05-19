@@ -1,0 +1,142 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'com.workspaceandroid'
+    compileSdk 33
+
+    defaultConfig {
+
+        applicationId "com.workspaceandroid"
+        minSdk 28
+        targetSdk 33
+        versionCode calculateVersionCode()
+        versionName calculateVersionName()
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+
+//        signingConfigs {
+//            release {
+//                storeFile file("../keystore.jks")
+//                storePassword System.getenv("KEYSTORE_PASSWORD")
+//                keyAlias System.getenv("KEY_ALIAS")
+//                keyPassword System.getenv("KEY_PASSWORD")
+//            }
+//        }
+    }
+
+    buildTypes {
+        debug {
+//            applicationIdSuffix '.debug'
+            versionNameSuffix '-debug'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+        }
+
+//        android.applicationVariants.all { variant ->
+//            variant.outputs.all {
+//                outputFileName = "${provideOutputFileName(variant)}.apk"
+//            }
+//        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.4.0'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+
+    // ci artifact
+    task printVersionInformation {
+        println "v" + calculateVersionName()
+    }
+    buildToolsVersion '33.0.1'
+}
+
+
+ext.provideOutputFileName = { variant ->
+//    def versionName = variant.versionName.minus("-$configuration.debugSuffix")
+    def versionName = variant.versionName
+    def versionCode = variant.versionCode
+    def buildType = variant.name
+    def suffix = new Date().format("yyyy.MM.dd'T'HH.mm")
+    return "${versionName}[${versionCode}]_${suffix}"
+
+//    outputFileName += "-v" + android.defaultConfig.versionName
+//    if (variant.buildType.name == "release") {
+//        outputFileName += ".apk"
+//    } else {
+//        outputFileName += "-SNAPSHOT.apk"
+//    }
+}
+
+dependencies {
+    implementation project(path: ':domain')
+    implementation project(path: ':data') //TODO remove
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.activity:activity-compose:1.6.1'
+
+    // compose
+    implementation "androidx.compose.ui:ui:$compose_ui_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
+    implementation 'androidx.compose.material3:material3:1.0.1'
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+
+    // lottie
+    implementation "com.airbnb.android:lottie-compose:5.0.3"
+
+    // di
+    implementation "com.google.dagger:hilt-android:$dagger_version"
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+    kapt "com.google.dagger:hilt-compiler:$dagger_version"
+
+    // navigation
+    implementation "androidx.navigation:navigation-compose:2.5.3"
+
+    // Lottie
+    implementation 'com.airbnb.android:lottie-compose:5.0.3'
+
+    // image
+    implementation "io.coil-kt:coil-compose:2.0.0"
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
+
+    implementation 'androidx.annotation:annotation:1.5.0'
+
+//    // networking
+//    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+//    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
+
+//    // gson
+//    implementation 'com.google.code.gson:gson:2.9.0'
+}
