@@ -12,9 +12,16 @@
     <plurals name="words">
         <item quantity="zero">слів</item>
         <item quantity="one">слово</item>
-        <item quantity="two">слова</item>
         <item quantity="few">слова</item>
-        <item quantity="many">слів</item>
-        <item quantity="other">слів</item>
+        <item quantity="other">слова</item>
+    </plurals>
+
+    <plurals name="learn">
+        <item quantity="zero">вривчено</item>
+        <item quantity="one">вивчене</item>
+        <item quantity="two">вивчені</item>
+        <item quantity="few">вивчених</item>
+        <item quantity="many">вивчених</item>
+        <item quantity="other">вивчених</item>
     </plurals>
 </resources>

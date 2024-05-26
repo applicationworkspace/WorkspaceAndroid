@@ -1,0 +1,96 @@
+<resources>
+    <string name="app_name">DailyWord</string>
+
+    <!--Labels -->
+    <string name="or">or</string>
+
+    <string name="label_edit">Edit</string>
+    <string name="label_reset">Reset</string>
+    <string name="label_remove">Remove</string>
+    <string name="label_see_all">See all</string>
+    <string name="label_name">Name</string>
+    <string name="label_description">Description</string>
+    <!--endregion-->
+
+
+    <!--Auth -->
+    <string name="auth_login">Login</string>
+    <string name="auth_header">Welcome Back!"👋"</string>
+    <string name="auth_sub_header">Hello again, you"'"ve been missed!</string>
+    <string name="auth_email">Email address</string>
+    <string name="auth_email_hint">Enter your email</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_password_hint">Enter your password</string>
+    <string name="auth_forgot_password">Forgot password?</string>
+    <string name="auth_password_show">Show password</string>
+    <string name="auth_password_hide">Hide password</string>
+    <string name="auth_dont_have_an_account">Don"'"t have an account? </string>
+    <string name="auth_register_now">Register now</string>
+
+    <string name="auth_email_content_description">Email</string>
+    <string name="auth_password_content_description">Password</string>
+    <!--endregion-->
+
+    <!--Registration -->
+    <string name="auth_sign_up">Sign Up</string>
+    <string name="auth_signup_header">Create Account</string>
+    <string name="auth_signup_sub_header">Collect your phrases in one place</string>
+    <string name="auth_password_again">Password again</string>
+    <string name="auth_password_again_hint">Enter your password again</string>
+    <string name="auth_terms_conditions">I agree to the terms and conditions</string>
+    <string name="auth_already_have_account">Already have an account?</string>
+    <string name="auth_or_sig_up_with">Register now</string>
+    <string name="auth_sign_in_with_google">Sign In With Google</string>
+
+    <string name="auth_email_empty">Email empty</string>
+    <string name="auth_email_wrong">Use correct Email format</string>
+    <!--endregion-->
+
+    <!--Collection tab -->
+    <string name="collection_title">Collection</string>
+    <string name="collection_overview">Overview</string>
+    <string name="collection_definition">Definition</string>
+    <string name="collection_examples">Examples</string>
+    <string name="collection_my_packs">My packs</string>
+    <string name="collection_search">Search</string>
+    <!--endregion-->
+
+    <!--Add phrase -->
+    <string name="search_title">Create card</string>
+    <string name="search_enter_phrase">Enter phrase</string>
+    <!--endregion-->
+
+    <!--Create card -->
+    <string name="create_card_phrase_label">Phrase</string>
+    <string name="create_card_phrase_placeholder">Enter phrase</string>
+    <string name="create_card_definition_label">Definition</string>
+    <string name="create_card_definition_placeholder">Enter definition</string>
+    <string name="create_card_add_example">Add example</string>
+    <string name="create_card_example_placeholder">Enter example</string>
+    <string name="create_card_translation_label">Translation</string>
+    <string name="create_card_translation_placeholder">Enter translation</string>
+    <string name="create_card_collection_label">Collection</string>
+    <string name="create_card_save">Save</string>
+
+    <string name="no_results">No results</string>
+    <!--endregion-->
+
+    <!--Notification -->
+    <string name="title_notification_reminder">notification_title</string>
+    <string name="description_notification_reminder">notification_description</string>
+    <string name="reminders_notification_channel_id">notification_channel_id</string>
+    <string name="reminders_notification_channel_name">notification_channel_name</string>
+    <!--endregion-->
+
+    <!--Game cards -->
+    <string name="game_cards_know">Know</string>
+    <string name="game_cards_dont_know">Know</string>
+    <!--endregion-->
+
+    <!--Groups page -->
+    <string name="groups_title">Collections</string>
+    <string name="groups_hint_enter_name">Enter group name</string>
+    <string name="groups_hint_enter_description">Enter group description</string>
+    <string name="groups_save">Save group</string>
+    <!--endregion-->
+</resources>

@@ -1,10 +1,10 @@
 package com.workspaceandroid.data.di
 
 import com.workspaceandroid.data.api.source.IAuthNetSource
-import com.workspaceandroid.data.api.source.IPhrasesNetSource
+import com.workspaceandroid.data.api.source.ICollectionNetSource
 import com.workspaceandroid.data.database.sharedpreferences.AppSharedPreferences
 import com.workspaceandroid.data.database.source.ProfileDbSource
-import com.workspaceandroid.data.mappers.CollectionsNetMapper
+import com.workspaceandroid.data.mappers.GroupNetMapper
 import com.workspaceandroid.data.mappers.PhrasesNetMapper
 import com.workspaceandroid.data.mappers.UserDetailsNetMapper
 import com.workspaceandroid.data.repositories.AuthRepository
@@ -39,14 +39,14 @@ object RepositoryModule {
     @Provides
     @ViewModelScoped
     fun provideCollectionRepository(
-        netSource: IPhrasesNetSource,
+        netSource: ICollectionNetSource,
         phrasesNetMapper: PhrasesNetMapper,
-        collectionsNetMapper: CollectionsNetMapper
+        groupNetMapper: GroupNetMapper
     ): ICollectionRepository {
         return CollectionRepository(
             netSource = netSource,
             phrasesNetMapper = phrasesNetMapper,
-            collectionsNetMapper = collectionsNetMapper
+            groupNetMapper = groupNetMapper
         )
     }
 }

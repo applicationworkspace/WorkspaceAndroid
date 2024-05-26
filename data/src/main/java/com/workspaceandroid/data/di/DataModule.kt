@@ -1,6 +1,6 @@
 package com.workspaceandroid.data.di
 
-import com.workspaceandroid.data.api.source.IPhrasesNetSource
+import com.workspaceandroid.data.api.source.ICollectionNetSource
 import com.workspaceandroid.data.common.ITimeHelper
 import com.workspaceandroid.data.common.TimeHelper
 import com.workspaceandroid.data.mappers.PhrasesNetMapper
@@ -23,7 +23,7 @@ class DataModule {
     @Singleton
     @Provides
     fun provideNotificationRepository(
-        netSource: IPhrasesNetSource,
+        netSource: ICollectionNetSource,
         phrasesNetMapper: PhrasesNetMapper
     ): INotificationRepository {
         return NotificationRepository(

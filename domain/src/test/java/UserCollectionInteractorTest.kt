@@ -1,5 +1,5 @@
 import com.workspaceandroid.domain.interactors.CollectionInteractor
-import com.workspaceandroid.domain.models.phrase.Phrase
+import com.workspaceandroid.domain.models.phrase.PhraseModel
 import com.workspaceandroid.domain.repositories.ICollectionRepository
 import defaultModels.defaultPhraseModel
 import kotlinx.coroutines.runBlocking
@@ -22,7 +22,7 @@ class UserCollectionInteractorTest {
 
     @Test
     fun `get user phrases`() = runBlocking {
-        val phrases: List<Phrase> = listOf(
+        val phrases: List<PhraseModel> = listOf(
             defaultPhraseModel(),
             defaultPhraseModel(),
             defaultPhraseModel()

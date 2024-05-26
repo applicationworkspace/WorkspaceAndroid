@@ -2,36 +2,37 @@
     <string name="app_name">DailyWord</string>
 
     <!--Labels -->
-    <string name="or">or</string>
+    <string name="or">або</string>
 
-    <string name="label_edit">Edit</string>
-    <string name="label_reset">Reset</string>
-    <string name="label_remove">Remove</string>
-    <string name="label_see_all">See all</string>
+    <string name="label_edit">Редагувати</string>
+    <string name="label_reset">Скинути</string>
+    <string name="label_remove">Видалити</string>
+    <string name="label_see_all">Переглянути всі</string>
+    <string name="label_name">Назва</string>
+    <string name="label_description">Опис</string>
     <!--endregion-->
 
-
     <!--Auth -->
-    <string name="auth_login">Login</string>
+    <string name="auth_login">Вхід</string>
     <string name="auth_header">Welcome Back!"👋"</string>
     <string name="auth_sub_header">Hello again, you"'"ve been missed!</string>
-    <string name="auth_email">Email address</string>
-    <string name="auth_email_hint">Enter your email</string>
-    <string name="auth_password">Password</string>
-    <string name="auth_password_hint">Enter your password</string>
-    <string name="auth_forgot_password">Forgot password?</string>
-    <string name="auth_password_show">Show password</string>
-    <string name="auth_password_hide">Hide password</string>
-    <string name="auth_dont_have_an_account">Don"'"t have an account? </string>
-    <string name="auth_register_now">Register now</string>
+    <string name="auth_email">Емейл адреса</string>
+    <string name="auth_email_hint">Введіть ваш емейл</string>
+    <string name="auth_password">Пароль</string>
+    <string name="auth_password_hint">Введіть ваш пароль</string>
+    <string name="auth_forgot_password">Забули пароль?</string>
+    <string name="auth_password_show">Показати пароль</string>
+    <string name="auth_password_hide">Приховати пароль</string>
+    <string name="auth_dont_have_an_account">Немає облікового запису? </string>
+    <string name="auth_register_now">Зареєструватися зараз</string>
 
-    <string name="auth_email_content_description">Email</string>
-    <string name="auth_password_content_description">Password</string>
+    <string name="auth_email_content_description">Емейл</string>
+    <string name="auth_password_content_description">Пароль</string>
     <!--endregion-->
 
     <!--Registration -->
-    <string name="auth_sign_up">Sign Up</string>
-    <string name="auth_signup_header">Create Account</string>
+    <string name="auth_sign_up">Реєстрація</string>
+    <string name="auth_signup_header">Стоврити акаунт</string>
     <string name="auth_signup_sub_header">Collect your phrases in one place</string>
     <string name="auth_password_again">Password again</string>
     <string name="auth_password_again_hint">Enter your password again</string>
@@ -83,5 +84,12 @@
     <!--Game cards -->
     <string name="game_cards_know">Know</string>
     <string name="game_cards_dont_know">Know</string>
+    <!--endregion-->
+
+    <!--Groups page -->
+    <string name="groups_title">Collections</string>
+    <string name="groups_hint_enter_name">Enter group name</string>
+    <string name="groups_hint_enter_description">Enter group description</string>
+    <string name="groups_save">Save group</string>
     <!--endregion-->
 </resources>

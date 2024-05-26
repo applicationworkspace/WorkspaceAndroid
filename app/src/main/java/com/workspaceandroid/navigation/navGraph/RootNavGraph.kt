@@ -26,5 +26,5 @@ object Graph {
     const val ROOT_ROUTE = "root"
     const val MAIN_ROUTE = "main"
     const val AUTHENTICATION_ROUTE = "authentication"
-    const val COLLECTION_ROUTE = "collection"
+    const val GROUPS_ROUTE = "groups"
 }

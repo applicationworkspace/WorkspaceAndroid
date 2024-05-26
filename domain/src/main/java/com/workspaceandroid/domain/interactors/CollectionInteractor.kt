@@ -1,8 +1,8 @@
 package com.workspaceandroid.domain.interactors
 
-import com.workspaceandroid.domain.models.phrase.Phrase
+import com.workspaceandroid.domain.models.phrase.PhraseModel
 import com.workspaceandroid.domain.models.phrase.PhraseInput
-import com.workspaceandroid.domain.models.phrase.UserCollection
+import com.workspaceandroid.domain.models.phrase.GroupModel
 import com.workspaceandroid.domain.repositories.ICollectionRepository
 import javax.inject.Inject
 
@@ -10,7 +10,7 @@ class CollectionInteractor @Inject constructor(
     private val collectionRepository: ICollectionRepository
 ) {
 
-    suspend fun getUserPhrases(): List<Phrase> {
+    suspend fun getUserPhrases(): List<PhraseModel> {
         return collectionRepository.fetchUserPhrases()
     }
 
@@ -22,19 +22,28 @@ class CollectionInteractor @Inject constructor(
         return collectionRepository.removePhrase(phraseId)
     }
 
-    suspend fun getUserCollections(): List<UserCollection> {
-        return collectionRepository.getUserCollections()
-    }
-
-    suspend fun getPhrasePrediction(phraseText: String): Phrase {
+    suspend fun getPhrasePrediction(phraseText: String): PhraseModel {
         return collectionRepository.getPhrasePrediction(phraseText)
     }
 
-    suspend fun getPhrasesForGame(): List<Phrase> {
+    suspend fun getPhrasesForGame(): List<PhraseModel> {
         return collectionRepository.getPhrasesForGame()
     }
 
     suspend fun updatePhraseRepeatStatus(phraseId: Long, isKnown: Boolean) {
         collectionRepository.updatePhraseRepeatStatus(phraseId, isKnown)
+    }
+
+
+    suspend fun getUserGroups(): List<GroupModel> {
+        return collectionRepository.getUserGroups()
+    }
+
+    suspend fun addUserGroup(userGroup: GroupModel) {
+        return collectionRepository.addUserGroup(userGroup)
+    }
+
+    suspend fun deleteUserGroup(id: Long) {
+        return collectionRepository.deleteUserGroup(id)
     }
 }

@@ -1,7 +1,7 @@
 package com.workspaceandroid.domain.repositories
 
-import com.workspaceandroid.domain.models.phrase.Phrase
+import com.workspaceandroid.domain.models.phrase.PhraseModel
 
 interface INotificationRepository {
-    suspend fun fetchUserPhraseForNotification(): Phrase
+    suspend fun fetchUserPhraseForNotification(): PhraseModel
 }

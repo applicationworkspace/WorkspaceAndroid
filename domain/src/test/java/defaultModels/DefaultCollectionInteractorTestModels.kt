@@ -1,9 +1,9 @@
 package defaultModels
 
-import com.workspaceandroid.domain.models.phrase.Phrase
+import com.workspaceandroid.domain.models.phrase.PhraseModel
 
-fun defaultPhraseModel(): Phrase =
-    Phrase(
+fun defaultPhraseModel(): PhraseModel =
+    PhraseModel(
         id = 1,
         createdAt = 1L,
         formattedDate = "date",

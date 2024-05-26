@@ -1,6 +1,6 @@
 package com.workspaceandroid.data.api.service
 
-import com.workspaceandroid.data.dto.phrases.CollectionNetDTO
+import com.workspaceandroid.data.dto.phrases.GroupNetDTO
 import com.workspaceandroid.data.dto.phrases.PhraseNetDTO
 import com.workspaceandroid.data.dto.phrases.PhraseRepeatStatusRequestDTO
 import retrofit2.http.Body
@@ -12,28 +12,34 @@ import retrofit2.http.Query
 
 interface NetworkApiService {
 
-    @GET("phrases")
+    @GET("/api/phrases")
     suspend fun getUserPhrases(): List<PhraseNetDTO>
 
-    @POST("collections/{collectionId}/phrase")
+    @POST("/api/collections/{collectionId}/phrase")
     suspend fun createUserPhrase(
         @Path("collectionId") collectionId: Long,
         @Body model: PhraseNetDTO
     )
 
-    @DELETE("phrases")
+    @POST("/api/collections")
+    suspend fun createUserGroup(@Body model: GroupNetDTO)
+
+    @DELETE("/api/phrases")
     suspend fun deleteUserPhrase(@Query("phraseId") phraseId: Long)
 
-    @GET("collections")
-    suspend fun getUserCollections(): List<CollectionNetDTO>
+    @GET("/api/collections")
+    suspend fun getUserGroups(): List<GroupNetDTO>
 
-    @GET("phrases/phrases-game")
+    @DELETE("/api/collections")
+    suspend fun deleteUserGroup(@Query("groupId") groupId: Long)
+
+    @GET("/api/phrases/phrases-game")
     suspend fun getPhrasesForGame(): List<PhraseNetDTO>
 
-    @GET("phrases/prediction")
+    @GET("/api/phrases/prediction")
     suspend fun loadPrediction(@Query("phraseText") phraseText: String): PhraseNetDTO
 
-    @POST("phrases/status")
+    @POST("/api/phrases/status")
     suspend fun updatePhraseRepeatStatus(
         @Body phraseRepeatStatusRequestDTO: PhraseRepeatStatusRequestDTO
     )

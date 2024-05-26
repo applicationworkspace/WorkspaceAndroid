@@ -1,6 +1,6 @@
 package com.workspaceandroid.data.repository
 
-import com.workspaceandroid.data.api.source.IPhrasesNetSource
+import com.workspaceandroid.data.api.source.ICollectionNetSource
 import com.workspaceandroid.data.mappers.PhrasesNetMapper
 import com.workspaceandroid.data.repositories.CollectionRepository
 import com.workspaceandroid.data.defaultTestModels.defaultPhraseModel
@@ -18,7 +18,7 @@ import org.mockito.kotlin.whenever
 class UserCollectionRepositoryTest {
 
     @Mock
-    lateinit var netSource: IPhrasesNetSource
+    lateinit var netSource: ICollectionNetSource
     @Mock
     lateinit var phrasesNetMapper: PhrasesNetMapper
 

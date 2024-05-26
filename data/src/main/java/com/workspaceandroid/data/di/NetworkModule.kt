@@ -5,9 +5,9 @@ import com.workspaceandroid.data.api.TokenInterceptor
 import com.workspaceandroid.data.api.service.AuthApiService
 import com.workspaceandroid.data.api.service.NetworkApiService
 import com.workspaceandroid.data.api.source.IAuthNetSource
-import com.workspaceandroid.data.api.source.IPhrasesNetSource
+import com.workspaceandroid.data.api.source.ICollectionNetSource
 import com.workspaceandroid.data.api.source.impl.AuthNetSource
-import com.workspaceandroid.data.api.source.impl.PhrasesNetSource
+import com.workspaceandroid.data.api.source.impl.CollectionNetSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,7 +35,7 @@ object NetworkModule {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(
-                "http://10.0.2.2:8080/api/"
+                "http://10.0.2.2:8080/"
             )
             .addConverterFactory(GsonConverterFactory.create())
 //            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
@@ -73,8 +73,8 @@ object NetworkModule {
     fun providePhrasesNetSource(
         networkApiService: NetworkApiService,
         tokenService: RefreshTokenService
-    ): IPhrasesNetSource {
-        return PhrasesNetSource(
+    ): ICollectionNetSource {
+        return CollectionNetSource(
             networkApiService = networkApiService,
             refreshTokenService = tokenService
         )

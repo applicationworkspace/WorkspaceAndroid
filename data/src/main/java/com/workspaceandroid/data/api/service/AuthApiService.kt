@@ -8,10 +8,10 @@ import retrofit2.http.POST
 
 interface AuthApiService {
 
-    @POST("auth/signin")
+    @POST("/api/auth/signin")
     suspend fun auth(@Body model: AuthorizationNetDTO): AuthResponseNetDTO
 
-    @POST("auth/refresh")
+    @POST("/api/auth/refresh")
     suspend fun refreshToken(): RefreshTokenNetDTO
 
 }

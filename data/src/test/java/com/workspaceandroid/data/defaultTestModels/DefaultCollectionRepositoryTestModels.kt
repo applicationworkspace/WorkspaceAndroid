@@ -1,10 +1,10 @@
 package com.workspaceandroid.data.defaultTestModels
 
 import com.workspaceandroid.data.dto.phrases.PhraseNetDTO
-import com.workspaceandroid.domain.models.phrase.Phrase
+import com.workspaceandroid.domain.models.phrase.PhraseModel
 
-fun defaultPhraseModel(): Phrase =
-    Phrase(
+fun defaultPhraseModel(): PhraseModel =
+    PhraseModel(
         id = 1,
         createdAt = 1L,
         formattedDate = "date",

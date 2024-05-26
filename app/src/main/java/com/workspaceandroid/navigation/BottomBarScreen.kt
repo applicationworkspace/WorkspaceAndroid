@@ -3,10 +3,8 @@ package com.workspaceandroid.navigation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.workspaceandroid.navigation.navGraph.Graph.COLLECTION_ROUTE
 
 sealed class BottomBarScreen(
     val route: String,
@@ -20,7 +18,7 @@ sealed class BottomBarScreen(
     )
 
     object Collection : BottomBarScreen(
-        route = "collection_screen",
+        route = "collection",
         title = "Collection",
         icon = Icons.Default.List
     )

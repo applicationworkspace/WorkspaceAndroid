@@ -11,6 +11,9 @@ sealed class Screen(val route: String) {
     object Collection: Screen(route = "collection_screen")
     object AddPhrase: Screen(route = "add_phrase_screen")
 
+    object Groups: Screen(route = "groups_screen")
+    object AddGroup: Screen(route = "add_group_screen")
+
     object Home: Screen(route = "home_screen")
     object Details: Screen(route = "details_screen/{$DETAILS_ARGUMENT_KEY}/{$DETAILS_ARGUMENT_KEY2}") {
         fun passNameAndId(id: Int = 0,
