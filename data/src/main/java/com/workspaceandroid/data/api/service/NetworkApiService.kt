@@ -1,6 +1,6 @@
 package com.workspaceandroid.data.api.service
 
-import com.workspaceandroid.data.dto.phrases.GroupNetDTO
+import com.workspaceandroid.data.dto.phrases.GroupModelNetDTO
 import com.workspaceandroid.data.dto.phrases.PhraseNetDTO
 import com.workspaceandroid.data.dto.phrases.PhraseRepeatStatusRequestDTO
 import retrofit2.http.Body
@@ -22,13 +22,13 @@ interface NetworkApiService {
     )
 
     @POST("/api/collections")
-    suspend fun createUserGroup(@Body model: GroupNetDTO)
+    suspend fun createUserGroup(@Body model: GroupModelNetDTO): GroupModelNetDTO
 
     @DELETE("/api/phrases")
     suspend fun deleteUserPhrase(@Query("phraseId") phraseId: Long)
 
     @GET("/api/collections")
-    suspend fun getUserGroups(): List<GroupNetDTO>
+    suspend fun getUserGroups(): List<GroupModelNetDTO>
 
     @DELETE("/api/collections")
     suspend fun deleteUserGroup(@Query("groupId") groupId: Long)

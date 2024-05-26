@@ -1,6 +1,7 @@
 package com.workspaceandroid.ui.feature.groups
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -36,24 +38,31 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.workspaceandroid.R
 import com.workspaceandroid.model.GroupUIModel
+import com.workspaceandroid.ui.theme.elevation_0
 import com.workspaceandroid.ui.theme.elevation_2
+import com.workspaceandroid.ui.theme.elevation_4
 import com.workspaceandroid.ui.theme.icon_size_32
 import com.workspaceandroid.ui.theme.light_gray
+import com.workspaceandroid.ui.theme.light_gray2
 import com.workspaceandroid.ui.theme.offset_12
 import com.workspaceandroid.ui.theme.offset_16
+import com.workspaceandroid.ui.theme.offset_4
 import com.workspaceandroid.ui.theme.offset_8
 import com.workspaceandroid.ui.theme.radius_16
 import com.workspaceandroid.ui.theme.radius_8
 import com.workspaceandroid.ui.theme.text_color_gray
 import com.workspaceandroid.ui.theme.white
 import com.workspaceandroid.ui.theme.width_1
+import com.workspaceandroid.ui.theme.width_2
 import com.workspaceandroid.ui.widgets.TextInput
 import com.workspaceandroid.ui.widgets.ToolbarComponent
 
@@ -67,7 +76,8 @@ fun GroupsScreen(
         onBackClick = { navController.popBackStack() },
         onEditGroupClick = { },
         onDeleteGroupClick = { viewModel.setEvent(GroupsContract.Event.OnDeleteGroupClicked(it)) },
-        onAddGroupClick = { viewModel.setEvent(GroupsContract.Event.OnSaveButtonClicked(it)) }
+        onAddGroupClick = { viewModel.setEvent(GroupsContract.Event.OnSaveButtonClicked(it)) },
+        onColorClick = { viewModel.setEvent(GroupsContract.Event.OnColorPicked(it)) }
     )
 }
 
@@ -80,17 +90,21 @@ fun GroupsScreen(
     onAddGroupClick: (GroupUIModel) -> Unit,
     onEditGroupClick: (GroupUIModel) -> Unit,
     onDeleteGroupClick: (GroupUIModel) -> Unit,
+    onColorClick: (String) -> Unit
 ) {
-    Column {
+    Column() {
         ToolbarComponent(
+            modifier = Modifier.padding(vertical = offset_4),
             text = stringResource(R.string.collection_title),
             onBackClick = onBackClick
         )
         LazyColumn(modifier = Modifier.padding(horizontal = offset_16)) {
             item {
                 NewGroupCard(
-                    modifier = Modifier,
-                    onAddClick = onAddGroupClick
+                    modifier = Modifier.padding(vertical = offset_8),
+                    onAddClick = onAddGroupClick,
+                    onColorClick = onColorClick,
+                    colors = state.colors
                 )
             }
             items(state.groups) { group ->
@@ -110,11 +124,14 @@ fun GroupsScreen(
 fun NewGroupCard(
     modifier: Modifier,
     onAddClick: (GroupUIModel) -> Unit,
+    colors: List<Pair<String, Boolean>>,
+    onColorClick: (String) -> Unit
 ) {
     var name by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
+
     Card(
-        elevation = CardDefaults.cardElevation(defaultElevation = elevation_2),
+        elevation = CardDefaults.cardElevation(defaultElevation = elevation_4),
         shape = RoundedCornerShape(radius_16),
         modifier = modifier,
         colors = CardDefaults.cardColors(
@@ -137,6 +154,20 @@ fun NewGroupCard(
                 label = stringResource(id = R.string.label_description),
                 placeholderText = stringResource(id = R.string.groups_hint_enter_description)
             )
+            LazyRow(modifier = Modifier.padding(top = offset_16)) {
+                items(colors) { color ->
+                    val borderWidth = if (color.second) width_2 else 0.dp
+                    Box(
+                        modifier = Modifier
+                            .padding(end = offset_16)
+                            .size(icon_size_32)
+                            .clip(CircleShape)
+                            .border(borderWidth, Color.Black, CircleShape)
+                            .background(Color(android.graphics.Color.parseColor(color.first)))
+                            .clickable { onColorClick.invoke(color.first) }
+                    )
+                }
+            }
             Button(
                 modifier = modifier
                     .align(Alignment.CenterHorizontally)
@@ -144,7 +175,14 @@ fun NewGroupCard(
                 onClick = {
                     //TODO refactor new model for the input
                     onAddClick.invoke(
-                        GroupUIModel(id = -1, name = name, description = description, hexColor = "40E0D0", phrases = emptyList(), isSelected = false)
+                        GroupUIModel(
+                            id = -1,
+                            name = name,
+                            description = description,
+                            hexColor = "40E0D0",
+                            phrases = emptyList(),
+                            isSelected = false
+                        )
                     )
                 },
                 shape = RoundedCornerShape(radius_8)
@@ -166,14 +204,14 @@ fun GroupCard(
     onDeleteClick: (GroupUIModel) -> Unit,
 ) {
     Card(
-        elevation = CardDefaults.cardElevation(defaultElevation = elevation_2),
+        elevation = CardDefaults.cardElevation(defaultElevation = elevation_0),
         shape = RoundedCornerShape(radius_16),
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = offset_8)
             .clickable { onCardClick.invoke(group) },
         colors = CardDefaults.cardColors(
-            containerColor = white
+            containerColor = light_gray
         )
     ) {
         Column(Modifier.padding(horizontal = offset_16, vertical = offset_12)) {
@@ -201,9 +239,9 @@ fun GroupCard(
             Divider(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = offset_16)
+                    .padding(top = offset_16)
                     .height(width_1),
-                color = light_gray
+                color = white
             )
             Row {
 //                FilledIconButton(
@@ -216,7 +254,7 @@ fun GroupCard(
 
                 FilledIconButton(
                     colors = IconButtonDefaults.filledIconButtonColors(
-                        containerColor = light_gray
+                        containerColor = white
                     ),
                     onClick = { onDeleteClick.invoke(group) }) {
                     Icon(Icons.Outlined.Delete, contentDescription = "Localized description")
@@ -249,6 +287,7 @@ private fun GroupsScreenPreview() {
         onBackClick = {},
         onAddGroupClick = {},
         onEditGroupClick = {},
-        onDeleteGroupClick = {}
+        onDeleteGroupClick = {},
+        onColorClick = {}
     )
 }

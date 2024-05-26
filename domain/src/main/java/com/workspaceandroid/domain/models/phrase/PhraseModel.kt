@@ -10,6 +10,7 @@ data class PhraseModel(
     val imgUrl: String,
     val examples: List<String>,
     val isDone: Boolean,
+    val repeatCount: Int,
 
     var isExpanded: Boolean
 )

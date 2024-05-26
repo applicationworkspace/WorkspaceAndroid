@@ -6,12 +6,13 @@ val text_color_gray = Color(0xFF6F6F6F)
 val gray = Color(0xFF808080)
 val light_gray = Color(0xFFF3F3F3)
 val light_gray2 = Color(0xFFB1B1B1)
+val light_gray3 = Color(0xFFDDDDDD)
 
 val shadow_blue = Color(0xFF7C81AB)
 
 val orange = Color(0xFFF2A68A)
 val blue = Color(0xFF6098F5)
-val green = Color(0xFFA1EEBD)
+val green = Color(0xFFBACD92)
 val red = Color(0xFFF6D6D6)
 
 val phrase_card_front = Color(0xFFFFFFFF)

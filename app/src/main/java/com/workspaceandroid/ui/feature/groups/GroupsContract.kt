@@ -10,11 +10,13 @@ class GroupsContract {
     sealed class Event : ViewEvent {
         data class OnSaveButtonClicked(val group: GroupUIModel) : Event()
         data class OnDeleteGroupClicked(val groupId: GroupUIModel) : Event()
+        data class OnColorPicked(val colorHex: String) : Event()
     }
 
     data class State(
         val isLoading: Boolean = false,
-        val groups: List<GroupUIModel> = emptyList()
+        val groups: List<GroupUIModel> = emptyList(),
+        val colors: List<Pair<String, Boolean>> = emptyList()
     ) : ViewState
 
     sealed class Effect : ViewSideEffect {

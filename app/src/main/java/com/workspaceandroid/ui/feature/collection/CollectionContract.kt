@@ -15,10 +15,11 @@ class CollectionContract {
         data class OnSearchInput(val searchText: String) : Event()
         data class OnPhraseRemove(val phraseId: Long) : Event()
         data class OnPhraseReset(val phraseId: Long) : Event()
+        data class OnGroupSelected(val group: GroupUIModel) : Event()
     }
 
     data class State(
-        val allGroups: List<GroupUIModel> = emptyList(),
+        val allGroupsWithPhrases: List<GroupUIModel> = emptyList(),
         val selectedPhrases: List<PhraseModel> = emptyList(),
 //        val phrases: List<Phrase> = emptyList(),
         val isLoading: Boolean = false

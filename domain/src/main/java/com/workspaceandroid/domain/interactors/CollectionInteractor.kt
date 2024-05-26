@@ -39,7 +39,7 @@ class CollectionInteractor @Inject constructor(
         return collectionRepository.getUserGroups()
     }
 
-    suspend fun addUserGroup(userGroup: GroupModel) {
+    suspend fun addUserGroup(userGroup: GroupModel): GroupModel {
         return collectionRepository.addUserGroup(userGroup)
     }
 

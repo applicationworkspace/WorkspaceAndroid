@@ -20,5 +20,5 @@ data class PhraseNetDTO(
     @SerializedName("userId")
     val phraseUserId: Long?,
     @SerializedName("repeatCount")
-    val repeatCount: Long?
+    val repeatCount: Int?
 )

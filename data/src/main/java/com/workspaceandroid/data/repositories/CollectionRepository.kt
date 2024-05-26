@@ -1,6 +1,7 @@
 package com.workspaceandroid.data.repositories
 
 import com.workspaceandroid.data.api.source.ICollectionNetSource
+import com.workspaceandroid.data.dto.phrases.GroupModelNetDTO
 import com.workspaceandroid.data.mappers.GroupNetMapper
 import com.workspaceandroid.data.mappers.PhrasesNetMapper
 import com.workspaceandroid.domain.models.phrase.PhraseModel
@@ -35,8 +36,8 @@ class CollectionRepository(
         return netSource.getUserGroups().run(groupNetMapper::mapListFrom)
     }
 
-    override suspend fun addUserGroup(group: GroupModel) {
-        netSource.addUserGroup(groupNetMapper.mapToEntity(group))
+    override suspend fun addUserGroup(group: GroupModel): GroupModel {
+        return netSource.addUserGroup(groupNetMapper.mapToEntity(group)).run(groupNetMapper::mapFromEntity)
     }
 
     override suspend fun deleteUserGroup(groupId: Long) {

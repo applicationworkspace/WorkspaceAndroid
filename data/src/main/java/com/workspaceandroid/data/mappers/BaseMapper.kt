@@ -1,13 +1,13 @@
 package com.workspaceandroid.data.mappers
 
-interface EntityMapper<Entity, DomainModel>{
+interface EntityMapper<InModel, OutModel>{
 
-    fun mapFromEntity(entity: Entity): DomainModel =
+    fun mapFromEntity(entity: InModel): OutModel =
         throw IllegalStateException("Not supported!")
 
-    fun mapToEntity(domainModel: DomainModel): Entity =
+    fun mapToEntity(domainModel: OutModel): InModel =
         throw IllegalStateException("Not supported!")
 
-    fun mapListTo(model: List<DomainModel>): List<Entity> = model.map { mapToEntity(it) }
-    fun mapListFrom(model: List<Entity>): List<DomainModel> = model.map { mapFromEntity(it) }
+    fun mapListTo(model: List<OutModel>): List<InModel> = model.map { mapToEntity(it) }
+    fun mapListFrom(model: List<InModel>): List<OutModel> = model.map { mapFromEntity(it) }
 }

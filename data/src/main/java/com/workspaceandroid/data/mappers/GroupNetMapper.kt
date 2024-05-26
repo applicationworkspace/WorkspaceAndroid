@@ -1,14 +1,14 @@
 package com.workspaceandroid.data.mappers
 
-import com.workspaceandroid.data.dto.phrases.GroupNetDTO
+import com.workspaceandroid.data.dto.phrases.GroupModelNetDTO
 import com.workspaceandroid.domain.models.phrase.GroupModel
 import javax.inject.Inject
 
 class GroupNetMapper @Inject constructor(
     private val phrasesNetMapper: PhrasesNetMapper,
-) : EntityMapper<GroupNetDTO, GroupModel> {
+) : EntityMapper<GroupModelNetDTO, GroupModel> {
 
-    override fun mapFromEntity(entity: GroupNetDTO): GroupModel {
+    override fun mapFromEntity(entity: GroupModelNetDTO): GroupModel {
         return GroupModel(
             id = entity.id ?: -1,
             colorHex = entity.colorHex ?: "FFFFFF",
@@ -18,8 +18,8 @@ class GroupNetMapper @Inject constructor(
         )
     }
 
-    override fun mapToEntity(domainModel: GroupModel): GroupNetDTO {
-        return GroupNetDTO(
+    override fun mapToEntity(domainModel: GroupModel): GroupModelNetDTO {
+        return GroupModelNetDTO(
             id = domainModel.id,
             colorHex = domainModel.colorHex,
             name = domainModel.name,

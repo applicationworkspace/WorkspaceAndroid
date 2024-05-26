@@ -33,6 +33,7 @@ val radius_8 = 8.dp
 val radius_12 = 12.dp
 val radius_16 = 16.dp
 
+val elevation_0 = 0.dp
 val elevation_2 = 2.dp
 val elevation_4 = 4.dp
 val elevation_6 = 6.dp

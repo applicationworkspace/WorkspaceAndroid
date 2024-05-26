@@ -27,6 +27,7 @@ class PhrasesNetMapper @Inject constructor(private val timeHelper: ITimeHelper) 
             examples = entity.phraseExamples ?: emptyList(),
             definition = entity.phraseDefinition.orEmpty(),
             isDone = (entity.repeatCount ?: 0) > 3,
+            repeatCount = entity.repeatCount ?: 0,
             isExpanded = false
         )
     }

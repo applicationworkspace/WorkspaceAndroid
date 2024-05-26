@@ -12,6 +12,7 @@
     <string name="label_description">Опис</string>
     <!--endregion-->
 
+
     <!--Auth -->
     <string name="auth_login">Вхід</string>
     <string name="auth_header">Welcome Back!"👋"</string>
@@ -55,8 +56,8 @@
     <!--endregion-->
 
     <!--Add phrase -->
-    <string name="search_title">Create card</string>
-    <string name="search_enter_phrase">Enter phrase</string>
+    <string name="add_phrase_title">Create card</string>
+    <string name="add_phrase_enter_phrase">Enter phrase</string>
     <!--endregion-->
 
     <!--Create card -->
@@ -87,9 +88,9 @@
     <!--endregion-->
 
     <!--Groups page -->
-    <string name="groups_title">Collections</string>
-    <string name="groups_hint_enter_name">Enter group name</string>
-    <string name="groups_hint_enter_description">Enter group description</string>
-    <string name="groups_save">Save group</string>
+    <string name="groups_title">Колекції</string>
+    <string name="groups_hint_enter_name">Введіть назву групи</string>
+    <string name="groups_hint_enter_description">Введіть опис групи</string>
+    <string name="groups_save">Додати</string>
     <!--endregion-->
 </resources>

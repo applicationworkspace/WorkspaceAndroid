@@ -38,7 +38,10 @@ class AddPhraseViewModel @Inject constructor(private val collectionInteractor: C
     }
 
     private fun saveUserPhrase() {
-        viewModelScope.launch { collectionInteractor.addUserPhrase(userInputPhrase) }
+        viewModelScope.launch {
+            collectionInteractor.addUserPhrase(userInputPhrase)
+            setEffect { AddPhraseContract.Effect.Navigation.Back }
+        }
     }
 
     private fun loadPhrasePrediction() {

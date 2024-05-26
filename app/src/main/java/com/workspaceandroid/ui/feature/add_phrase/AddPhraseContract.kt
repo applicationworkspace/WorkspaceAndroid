@@ -24,7 +24,7 @@ class AddPhraseContract {
         data class ShowToast(val message: String) : Effect()
 
         sealed class Navigation : Effect() {
-            data class Back(val userSearch: String): Navigation()
+            object Back: Navigation()
         }
     }
 }

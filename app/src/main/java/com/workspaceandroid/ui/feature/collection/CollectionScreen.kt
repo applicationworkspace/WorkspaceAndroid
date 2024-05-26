@@ -14,36 +14,40 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.workspaceandroid.R
 import com.workspaceandroid.domain.models.phrase.PhraseModel
-import com.workspaceandroid.domain.models.phrase.GroupModel
 import com.workspaceandroid.model.GroupUIModel
 import com.workspaceandroid.navigation.Screen
 import com.workspaceandroid.navigation.navGraph.Graph
 import com.workspaceandroid.ui.theme.*
 import com.workspaceandroid.ui.widgets.ActionButton
 import com.workspaceandroid.ui.widgets.TextInput
-import com.workspaceandroid.ui.widgets.ToolbarComponent
+import com.workspaceandroid.ui.widgets.TrackProgress
 import com.workspaceandroid.utils.EXPAND_ANIMATION_DURATION
 import com.workspaceandroid.utils.EXPANSTION_TRANSITION_DURATION
 import com.workspaceandroid.utils.noRippleClickable
@@ -68,7 +72,9 @@ fun CollectionScreen(
         onResetClick = { phraseId ->
             viewModel.setEvent(CollectionContract.Event.OnPhraseReset(phraseId))
         },
-        onCollectionClick = { collection -> viewModel.onCollectionSelected(collection) },
+        onCollectionClick = {
+            viewModel.setEvent(CollectionContract.Event.OnGroupSelected(it))
+        },
         onSeeAllClick = {
             navController.navigate(Graph.GROUPS_ROUTE)
         }
@@ -95,7 +101,7 @@ fun CollectionScreen(
     onRemoveClick: (Long) -> Unit,
     onResetClick: (Long) -> Unit,
     onCollectionClick: (GroupUIModel) -> Unit,
-    onSeeAllClick: () -> Unit
+    onSeeAllClick: () -> Unit,
 ) {
 
     Scaffold(floatingActionButton = {
@@ -119,13 +125,13 @@ fun CollectionScreen(
                 ) {
                     item {
                         OverviewSection(
-                            knownPhrases = state.allGroups
+                            knownPhrases = state.allGroupsWithPhrases
                                 .flatMap { it.phrases }
                                 .count { it.isDone },
-                            phrasesCount = state.allGroups.sumOf { it.phrases.size })
+                            phrasesCount = state.allGroupsWithPhrases.sumOf { it.phrases.size })
                         Spacer(modifier = Modifier.height(offset_12))
                         UserPacksContainer(
-                            state.allGroups,
+                            state.allGroupsWithPhrases,
                             onCollectionClick = { onCollectionClick(it) },
                             onSeeAllClick = { onSeeAllClick.invoke() }
                         )
@@ -158,7 +164,7 @@ fun ExpandableCard(
     onCardClick: () -> Unit,
     expanded: Boolean,
     onRemoveClick: (Long) -> Unit,
-    onResetClick: (Long) -> Unit
+    onResetClick: (Long) -> Unit,
 ) {
     val transitionState = remember {
         MutableTransitionState(expanded).apply {
@@ -198,9 +204,15 @@ fun ExpandableCard(
             .padding(vertical = offset_8),
         colors = CardDefaults.cardColors(containerColor = white)
     ) {
-        Column(Modifier.padding(top = offset_8, start = offset_8, end = offset_8)) {
+        Column(
+            Modifier.padding(
+                top = offset_8,
+                start = offset_8,
+                end = offset_8
+            )
+        ) { //TODO refactor use UI model
             Box(modifier = Modifier.noRippleClickable { onCardClick() }) {
-                CardTitle(phrase.text, phrase.isDone)
+                CardTitle(phrase.text, phrase.isDone, phrase.repeatCount)
                 CardArrow(
                     modifier = Modifier.align(Alignment.TopEnd),
                     degrees = arrowRotationDegree,
@@ -228,9 +240,8 @@ fun CardArrow(
 }
 
 @Composable
-fun CardTitle(title: String, isDone: Boolean) {
+fun CardTitle(title: String, isDone: Boolean, repeatCount: Int) {
     Column {
-        if (isDone) Icon(Icons.Filled.Done, contentDescription = "Done icon")
         Text(
             text = title,
             modifier = Modifier
@@ -239,6 +250,33 @@ fun CardTitle(title: String, isDone: Boolean) {
             textAlign = TextAlign.Left,
             style = MaterialTheme.typography.titleMedium
         )
+
+        TrackProgress(
+            modifier = Modifier.padding(top = offset_12),
+            items = 4,
+            lineWidth = 2.dp,
+            brush = { step ->
+                if (step >= repeatCount - 1) {
+                    Brush.horizontalGradient(listOf(light_gray3, light_gray3))
+                } else {
+                    Brush.horizontalGradient(listOf(green, green))
+                }
+            },
+            icon = { step ->
+                if (step > repeatCount - 1) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_circle),
+                        contentDescription = null,
+                        tint = Color.Unspecified
+                    )
+                } else {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_check),
+                        contentDescription = null,
+                        tint = Color.Unspecified
+                    )
+                }
+            })
         LazyRow(
             modifier = Modifier.padding(
                 start = offset_12,
@@ -261,7 +299,7 @@ fun ExpandableContent(
     phraseModel: PhraseModel,
     visible: Boolean = true,
     onRemoveClick: (Long) -> Unit,
-    onResetClick: (Long) -> Unit
+    onResetClick: (Long) -> Unit,
 ) {
     val enterTransition = remember {
         expandVertically(
@@ -284,7 +322,7 @@ fun ExpandableContent(
     }
 
     AnimatedVisibility(visible = visible, enter = enterTransition, exit = exitTransition) {
-        Column {
+        Column(modifier = Modifier.padding(horizontal = offset_8)) {
             Text(phraseModel.definition)
 
             Divider(
@@ -302,7 +340,10 @@ fun ExpandableContent(
                     .height(width_1), color = light_gray
             )
 
-            Row {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
                 ActionButton(painter = painterResource(R.drawable.ic_edit),
                     buttonText = stringResource(id = R.string.label_edit),
                     fontColor = shadow_blue,
@@ -390,7 +431,7 @@ fun OverviewSection(
 fun UserPacksContainer(
     userCollections: List<GroupUIModel>,
     onCollectionClick: (GroupUIModel) -> Unit,
-    onSeeAllClick: () -> Unit
+    onSeeAllClick: () -> Unit,
 ) {
     Card(
         shape = RoundedCornerShape(radius_16),
@@ -415,6 +456,7 @@ fun UserPacksContainer(
                     .align(Alignment.TopEnd)
                     .clickable { onSeeAllClick.invoke() },
                 text = stringResource(R.string.label_see_all),
+                textDecoration = TextDecoration.Underline,
                 fontWeight = FontWeight.Bold
             )
         }
@@ -439,7 +481,8 @@ fun UserPacksContainer(
                     colors = CardDefaults.cardColors(
                         containerColor = Color(android.graphics.Color.parseColor("#FF${collection.hexColor}"))
                     ),
-                    border = if (itemSelected) BorderStroke(width_2, Color.Red) else null) {
+                    border = if (itemSelected) BorderStroke(width_2, Color.Red) else null
+                ) {
                     Column(
                         Modifier.padding(offset_16)
                     ) {
@@ -479,7 +522,7 @@ fun CollectionScreenPreview() {
 //    CollectionScreen(navController = rememberNavController())
     CollectionScreen(
         state = CollectionContract.State(
-            allGroups = listOf(
+            allGroupsWithPhrases = listOf(
                 GroupUIModel(
                     id = 1,
                     hexColor = "FFFFFF",
@@ -498,9 +541,10 @@ fun CollectionScreenPreview() {
                     imgUrl = "url",
                     examples = listOf("example1, example2Here"),
                     definition = "definition here",
-                    isExpanded = false,
+                    isExpanded = true,
                     translation = "translation",
-                    isDone = true
+                    isDone = true,
+                    repeatCount = 1
                 )
             )
         ),

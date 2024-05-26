@@ -329,7 +329,8 @@ fun HomeScreenPreview() {
                     definition = "definition here",
                     isExpanded = false,
                     translation = "translation",
-                    isDone = false
+                    isDone = false,
+                    repeatCount = 2
                 ),
                 PhraseModel(
                     id = 2L,
@@ -341,7 +342,8 @@ fun HomeScreenPreview() {
                     definition = "definition here",
                     isExpanded = false,
                     translation = "translation",
-                    isDone = false
+                    isDone = false,
+                    repeatCount = 2
                 )
             )
         ),

@@ -56,8 +56,8 @@
     <!--endregion-->
 
     <!--Add phrase -->
-    <string name="search_title">Create card</string>
-    <string name="search_enter_phrase">Enter phrase</string>
+    <string name="add_phrase_title">Create card</string>
+    <string name="add_phrase_enter_phrase">Enter phrase</string>
     <!--endregion-->
 
     <!--Create card -->

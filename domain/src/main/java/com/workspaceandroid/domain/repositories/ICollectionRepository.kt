@@ -10,7 +10,7 @@ interface ICollectionRepository {
     suspend fun removePhrase(phraseId: Long)
     suspend fun getPhrasePrediction(phraseText: String): PhraseModel
     suspend fun getUserGroups(): List<GroupModel>
-    suspend fun addUserGroup(group: GroupModel)
+    suspend fun addUserGroup(group: GroupModel): GroupModel
     suspend fun deleteUserGroup(groupId: Long)
     suspend fun getPhrasesForGame(): List<PhraseModel>
     suspend fun updatePhraseRepeatStatus(phraseId: Long, isKnown: Boolean)

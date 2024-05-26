@@ -4,7 +4,7 @@ import com.workspaceandroid.data.api.RefreshTokenService
 import com.workspaceandroid.data.api.service.NetworkApiService
 import com.workspaceandroid.data.api.source.ICollectionNetSource
 import com.workspaceandroid.data.api.source.base.BaseNetSource
-import com.workspaceandroid.data.dto.phrases.GroupNetDTO
+import com.workspaceandroid.data.dto.phrases.GroupModelNetDTO
 import com.workspaceandroid.data.dto.phrases.PhraseNetDTO
 import com.workspaceandroid.data.dto.phrases.PhraseRepeatStatusRequestDTO
 
@@ -21,7 +21,7 @@ internal class CollectionNetSource(
         return performRequest { createUserPhrase(collectionId, userPhrase) }
     }
 
-    override suspend fun addUserGroup(group: GroupNetDTO) {
+    override suspend fun addUserGroup(group: GroupModelNetDTO): GroupModelNetDTO {
         return performRequest { createUserGroup(group) }
     }
 
@@ -39,7 +39,7 @@ internal class CollectionNetSource(
         }
     }
 
-    override suspend fun getUserGroups(): List<GroupNetDTO> {
+    override suspend fun getUserGroups(): List<GroupModelNetDTO> {
         return performRequest { getUserGroups() }
     }
 

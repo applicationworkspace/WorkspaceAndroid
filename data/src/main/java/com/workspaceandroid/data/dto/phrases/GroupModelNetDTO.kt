@@ -2,7 +2,7 @@ package com.workspaceandroid.data.dto.phrases
 
 import com.google.gson.annotations.SerializedName
 
-data class GroupNetDTO(
+data class GroupModelNetDTO(
     @SerializedName("id")
     val id: Long?,
     @SerializedName("colorHex")

@@ -35,7 +35,7 @@ fun ActionButton(
             focusedElevation = 0.dp
         ),
         shape = RoundedCornerShape(radius_16),
-        contentPadding = PaddingValues(offset_16),
+        contentPadding = PaddingValues(offset_8),
         colors = ButtonDefaults.buttonColors(
             containerColor = backgroundColor,
             contentColor = fontColor

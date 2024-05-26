@@ -43,6 +43,7 @@ import com.workspaceandroid.ui.theme.light_gray
 import com.workspaceandroid.ui.theme.light_gray2
 import com.workspaceandroid.ui.theme.offset_12
 import com.workspaceandroid.ui.theme.offset_16
+import com.workspaceandroid.ui.theme.offset_4
 import com.workspaceandroid.ui.theme.white
 import com.workspaceandroid.ui.widgets.ActionButton
 import com.workspaceandroid.ui.widgets.TextInput
@@ -60,7 +61,8 @@ fun AddPhraseScreen(
             viewModel.setEvent(
                 AddPhraseContract.Event.OnPhraseUpdated(builder)
             )
-        }
+        },
+        onBackClick = { navController.popBackStack() }
     )
 
     LaunchedEffect(Unit) {
@@ -79,6 +81,7 @@ fun AddPhraseScreen(
     state: AddPhraseContract.State,
     onSaveClick: () -> Unit,
     phraseBuilder: (PhraseInput.() -> Unit) -> Unit,
+    onBackClick: () -> Unit,
 ) {
 
     Surface(
@@ -87,19 +90,19 @@ fun AddPhraseScreen(
             .verticalScroll(rememberScrollState()),
         color = white
     ) {
-
-        ConstraintLayout(
-            Modifier.padding(offset_16)
-        ) {
+        Column {
 
             var textFieldCount by remember { mutableStateOf(0) }
             var isEditableCard by remember { mutableStateOf(false) }
 
             ToolbarComponent(
-                text = stringResource(R.string.search_title)
+                modifier = Modifier.padding(vertical = offset_4),
+                text = stringResource(R.string.add_phrase_title),
+                onBackClick = onBackClick
             )
 
             Card(
+                modifier = Modifier.padding(horizontal = offset_16),
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
                 elevation = CardDefaults.cardElevation(defaultElevation = elevation_4)
@@ -201,7 +204,7 @@ fun AddPhraseScreen(
                     Modifier.padding(start = offset_12),
                     painter = painterResource(R.drawable.ic_save),
                     buttonText = stringResource(id = R.string.create_card_save),
-                    fontColor = light_gray2,
+                    fontColor = Color.Black,
                     onClick = { onSaveClick() }
                 )
 
@@ -214,10 +217,9 @@ fun AddPhraseScreen(
 @Preview(showBackground = true)
 fun CollectionScreenPreview() {
     AddPhraseScreen(
-        state = AddPhraseContract.State(
-
-        ),
+        state = AddPhraseContract.State(),
         onSaveClick = {},
-        phraseBuilder = {}
+        phraseBuilder = {},
+        onBackClick = {}
     )
 }
