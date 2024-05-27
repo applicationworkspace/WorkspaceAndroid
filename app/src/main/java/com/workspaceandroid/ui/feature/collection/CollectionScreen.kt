@@ -121,7 +121,7 @@ fun CollectionScreen(
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(offset_16)
+                        .padding(horizontal = offset_16)
                 ) {
                     item {
                         OverviewSection(
@@ -323,8 +323,8 @@ fun ExpandableContent(
 
     AnimatedVisibility(visible = visible, enter = enterTransition, exit = exitTransition) {
         Column(modifier = Modifier.padding(horizontal = offset_8)) {
-            Text(phraseModel.definition)
-
+            Text(phraseModel.translation)
+            Text(modifier = Modifier.padding(top = offset_8), text = phraseModel.definition)
             Divider(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -332,7 +332,7 @@ fun ExpandableContent(
                     .height(width_1),
                 color = light_gray
             )
-            Text(text = phraseModel.examples.joinToString(separator = "\n"))
+            Text(modifier = Modifier.padding(top = offset_8), text = phraseModel.examples.joinToString(separator = "\n"))
 
             Divider(
                 modifier = Modifier
@@ -479,7 +479,7 @@ fun UserPacksContainer(
                         },
                     shape = RoundedCornerShape(radius_8),
                     colors = CardDefaults.cardColors(
-                        containerColor = Color(android.graphics.Color.parseColor("#FF${collection.hexColor}"))
+                        containerColor = Color(android.graphics.Color.parseColor("#${collection.hexColor}"))
                     ),
                     border = if (itemSelected) BorderStroke(width_2, Color.Red) else null
                 ) {

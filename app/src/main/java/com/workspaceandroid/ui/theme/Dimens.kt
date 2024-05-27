@@ -25,6 +25,7 @@ val icon_size_16 = 16.dp
 val icon_size_24 = 24.dp
 val icon_size_32 = 32.dp
 val icon_size_64 = 64.dp
+val icon_size_120 = 120.dp
 
 val radius_2 = 2.dp
 val radius_4 = 4.dp

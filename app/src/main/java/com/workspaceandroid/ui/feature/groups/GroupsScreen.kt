@@ -178,8 +178,8 @@ fun NewGroupCard(
                         GroupUIModel(
                             id = -1,
                             name = name,
-                            description = description,
-                            hexColor = "40E0D0",
+                            description = description, //TODO refactor default value
+                            hexColor = "FFFFFF",
                             phrases = emptyList(),
                             isSelected = false
                         )
@@ -229,7 +229,7 @@ fun GroupCard(
                     modifier = Modifier
                         .size(icon_size_32)
                         .clip(CircleShape)
-                        .background(Color(android.graphics.Color.parseColor("#FF${group.hexColor}")))
+                        .background(Color(android.graphics.Color.parseColor("#${group.hexColor}")))
                 )
             }
             Text(

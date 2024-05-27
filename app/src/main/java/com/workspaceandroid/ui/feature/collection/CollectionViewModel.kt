@@ -21,7 +21,7 @@ class CollectionViewModel @Inject constructor(
         AZ, DATE
     }
 
-    private val allCollections: List<GroupUIModel>
+    private val allGroups: List<GroupUIModel>
         get() = viewState.value.allGroupsWithPhrases
 
     override fun setInitialState(): CollectionContract.State =
@@ -71,8 +71,8 @@ class CollectionViewModel @Inject constructor(
     }
 
     private fun onGroupSelected(group: GroupUIModel) {
-        val phrasesFromCollection = allCollections.firstOrNull { it.id == group.id }?.phrases
-        val updatedGroups = allCollections.map { it.copy(isSelected = it.id == group.id)}
+        val phrasesFromCollection = allGroups.firstOrNull { it.id == group.id }?.phrases
+        val updatedGroups = allGroups.map { it.copy(isSelected = it.id == group.id)}
         setState { copy(
             allGroupsWithPhrases = updatedGroups,
             selectedPhrases = phrasesFromCollection ?: emptyList()
@@ -96,7 +96,7 @@ class CollectionViewModel @Inject constructor(
         viewModelScope.launch {
             collectionInteractor.removePhrase(phraseId)
         }
-        val phrasesWithoutDeleted = allCollections
+        val phrasesWithoutDeleted = allGroups
             .flatMap { it.phrases }
             .filter { it.id != phraseId }
         setState {
@@ -108,13 +108,15 @@ class CollectionViewModel @Inject constructor(
         viewModelScope.launch {
             collectionInteractor.updatePhraseRepeatStatus(phraseId, false)
             setEffect { CollectionContract.Effect.ShowToast("The phrase has been reset") }
-            val updatedPhrases = allCollections
-                .flatMap { it.phrases }
-                .map { phrase ->
-                    phrase.copy(isDone = false).takeIf { phrase.id == phraseId } ?: phrase
+            val updatePhrasesInGroups = allGroups
+                .map { group ->
+                    group.copy(phrases = group.phrases.map { phrase ->
+                        phrase.copy(isDone = false, repeatCount = 0).takeIf { phrase.id == phraseId } ?: phrase
+                    })
                 }
+            val updatePhrases = updatePhrasesInGroups.flatMap { it.phrases }
             setState {
-                copy(selectedPhrases = updatedPhrases)
+                copy(selectedPhrases = updatePhrases, allGroupsWithPhrases = updatePhrasesInGroups)
             }
         }
     }

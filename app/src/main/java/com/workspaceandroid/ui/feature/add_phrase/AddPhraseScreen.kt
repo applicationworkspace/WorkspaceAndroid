@@ -117,9 +117,7 @@ fun AddPhraseScreen(
                     TextInput(
                         onInputChanged = {
                             isEditableCard = false
-                            phraseBuilder {
-                                text = it
-                            }
+                            phraseBuilder { text = it }
                         },
                         label = stringResource(id = R.string.create_card_phrase_label),
                         placeholderText = stringResource(id = R.string.create_card_phrase_placeholder)
@@ -128,9 +126,7 @@ fun AddPhraseScreen(
                     TextInput(
                         inputValue = state.predictedPhrase?.examples?.firstOrNull().orEmpty(),
                         onInputChanged = {
-                            phraseBuilder {
-                                definition = it
-                            }
+                            phraseBuilder { translation = it }
                         },
                         label = stringResource(id = R.string.create_card_translation_label),
                         placeholderText = stringResource(id = R.string.create_card_translation_placeholder)
@@ -177,20 +173,23 @@ fun AddPhraseScreen(
                         }
                     )
 
-                    repeat(textFieldCount) {
+                    repeat(textFieldCount) { times ->
                         TextInput(
                             modifier = Modifier.padding(top = offset_12),
-                            label = "Example #${it + 1}",
+                            label = "Example #${times + 1}",
                             placeholderText = stringResource(id = R.string.create_card_example_placeholder),
                             onInputChanged = { exampleText ->
                                 phraseBuilder {
-                                    examples = mapOf(1 to exampleText)
+                                    if (examples.containsKey(times)) {
+                                        examples.remove(times)
+                                        examples[times] = exampleText
+                                    } else {
+                                        examples[times] = exampleText
+                                    }
                                 }
                             },
                         )
                     }
-
-
                 }
 
                 Divider(

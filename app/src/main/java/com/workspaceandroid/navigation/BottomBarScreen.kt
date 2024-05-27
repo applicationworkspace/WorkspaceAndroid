@@ -1,9 +1,9 @@
 package com.workspaceandroid.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Style
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class BottomBarScreen(
@@ -13,8 +13,8 @@ sealed class BottomBarScreen(
 ) {
     object Home : BottomBarScreen(
         route = "home",
-        title = "Home",
-        icon = Icons.Default.Home
+        title = "Training",
+        icon = Icons.Default.Style
     )
 
     object Collection : BottomBarScreen(

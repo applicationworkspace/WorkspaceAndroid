@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -35,6 +36,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.workspaceandroid.navigation.BottomBarScreen
 import com.workspaceandroid.navigation.navGraph.MainNavGraph
+import com.workspaceandroid.ui.theme.cornflower
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,7 +70,7 @@ fun MainScreen() {
 fun BottomBar(
     navController: NavHostController,
     state: MutableState<Boolean>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val screens = listOf(
         BottomBarScreen.Home,
@@ -84,10 +86,10 @@ fun BottomBar(
         exit = slideOutVertically(targetOffsetY = { it }),
     ) {
         NavigationBar(
-//            modifier = modifier
             modifier = Modifier
-                    .fillMaxWidth()
-                .clip(RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp))
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)),
+            containerColor = cornflower
         ) {
             val bottomBarDestination = screens.any { it.route == currentDestination?.route }
             if (bottomBarDestination) {

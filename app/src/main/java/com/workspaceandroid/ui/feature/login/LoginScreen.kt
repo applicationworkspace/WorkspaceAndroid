@@ -1,6 +1,7 @@
 package com.workspaceandroid.ui.feature.login
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -20,6 +23,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -35,9 +40,13 @@ import com.workspaceandroid.navigation.navGraph.Graph
 import com.workspaceandroid.ui.feature.login.LoginContract.Effect
 import com.workspaceandroid.ui.feature.login.LoginContract.Event
 import com.workspaceandroid.ui.feature.login.LoginContract.LoginState
+import com.workspaceandroid.ui.theme.green2
+import com.workspaceandroid.ui.theme.icon_size_120
+import com.workspaceandroid.ui.theme.icon_size_64
 import com.workspaceandroid.ui.theme.offset_12
 import com.workspaceandroid.ui.theme.offset_16
 import com.workspaceandroid.ui.theme.offset_32
+import com.workspaceandroid.ui.theme.offset_64
 import com.workspaceandroid.ui.theme.offset_8
 import com.workspaceandroid.ui.theme.radius_8
 import com.workspaceandroid.ui.widgets.HyperlinkText
@@ -47,7 +56,7 @@ import com.workspaceandroid.ui.widgets.PasswordInputTextField
 @Composable
 fun LoginScreen(
     navController: NavHostController,
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: LoginViewModel = hiltViewModel(),
 ) {
     LoginScreen(
         state = viewModel.viewState.collectAsState().value,
@@ -71,11 +80,13 @@ fun LoginScreen(
 //                        duration = SnackbarDuration.Short
 //                    )
                 }
+
                 is Effect.Navigation.ToMain -> {
                     navController.navigate(Graph.MAIN_ROUTE) {
                         popUpTo(Graph.MAIN_ROUTE)
                     }
                 }
+
                 Effect.Navigation.ToRegistration -> {
                     navController.navigate(route = Screen.SignUp.route)
                 }
@@ -89,7 +100,7 @@ fun LoginScreen(
 fun LoginScreen(
     state: LoginState,
     onLoginClick: (String, String) -> Unit,
-    onSignUpClick: () -> Unit
+    onSignUpClick: () -> Unit,
 ) {
 
     val inputValueEmail = rememberSaveable { mutableStateOf("sasha@gmail.com") }
@@ -108,7 +119,7 @@ fun LoginScreen(
         ConstraintLayout(
             Modifier.padding(offset_16)
         ) {
-            val (headerText, inputEmail, inputPassword, loginButton, forgotPassword, signUpLink) = createRefs()
+            val (headerText, logoBlock, inputEmail, inputPassword, loginButton, forgotPassword, signUpLink) = createRefs()
 
             Column(modifier = Modifier
                 .constrainAs(headerText) {
@@ -122,6 +133,21 @@ fun LoginScreen(
                 Spacer(modifier = Modifier.height(offset_12))
                 Text(
                     text = stringResource(R.string.auth_sub_header)
+                )
+            }
+
+            Box(modifier = Modifier
+                .constrainAs(logoBlock) {
+                    top.linkTo(headerText.bottom, margin = offset_64)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }) {
+                Icon(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(icon_size_120),
+                    painter = painterResource(R.drawable.ic_login_logo), contentDescription = "",
+                    tint = Color.Unspecified
                 )
             }
 
@@ -204,7 +230,7 @@ fun LoginScreen(
 @Composable
 fun LoginButton(
     modifier: Modifier = Modifier,
-    onButtonClick: () -> Unit
+    onButtonClick: () -> Unit,
 ) {
     Button(
         onClick = onButtonClick,
@@ -213,6 +239,9 @@ fun LoginButton(
                 top = offset_32,
                 bottom = offset_32
             ),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = green2
+        ),
         shape = RoundedCornerShape(radius_8)
     ) {
         Text(
