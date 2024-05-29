@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">EDUCARDS</string>
-
     <!--Labels -->
-    <string name="or">або</string>
-
+    <string name="label_or">або</string>
     <string name="label_edit">Редагувати</string>
     <string name="label_reset">Скинути</string>
     <string name="label_remove">Видалити</string>
@@ -11,7 +9,6 @@
     <string name="label_name">Назва</string>
     <string name="label_description">Опис</string>
     <!--endregion-->
-
 
     <!--Auth -->
     <string name="auth_login">Вхід</string>
@@ -33,46 +30,49 @@
 
     <!--Registration -->
     <string name="auth_sign_up">Реєстрація</string>
-    <string name="auth_signup_header">Стоврити акаунт</string>
+    <string name="auth_signup_header">Створити акаунт</string>
     <string name="auth_signup_sub_header">Collect your phrases in one place</string>
-    <string name="auth_password_again">Password again</string>
-    <string name="auth_password_again_hint">Enter your password again</string>
-    <string name="auth_terms_conditions">I agree to the terms and conditions</string>
-    <string name="auth_already_have_account">Already have an account?</string>
-    <string name="auth_or_sig_up_with">Register now</string>
+    <string name="auth_password_again">Повторіть пароль</string>
+    <string name="auth_password_again_hint">Введіть пароль ще раз</string>
+    <string name="auth_terms_conditions">Я погоджуюся з умовами та положеннями</string>
+    <string name="auth_already_have_account">Вже маєте обліковий запис?</string>
+    <string name="auth_or_sig_up_with">Зареєструватися</string>
     <string name="auth_sign_in_with_google">Sign In With Google</string>
 
-    <string name="auth_email_empty">Email empty</string>
-    <string name="auth_email_wrong">Use correct Email format</string>
+    <string name="auth_email_empty">Емейл порожній</string>
+    <string name="auth_email_wrong">Використовуйте правильний формат емейлу</string>
     <!--endregion-->
 
+
     <!--Collection tab -->
-    <string name="collection_title">Collection</string>
-    <string name="collection_overview">Overview</string>
-    <string name="collection_definition">Definition</string>
-    <string name="collection_examples">Examples</string>
-    <string name="collection_my_packs">My packs</string>
-    <string name="collection_search">Search</string>
+    <string name="collection_title">Колекція</string>
+    <string name="collection_overview">Огляд</string>
+    <string name="collection_definition">Визначення</string>
+    <string name="collection_examples">Приклад</string>
+    <string name="collection_my_groups">Мої колекції</string>
+    <string name="collection_search">Пошук</string>
+    <string name="collection_message_phrase_reset">Статистика фрази видалена</string>
     <!--endregion-->
 
     <!--Add phrase -->
-    <string name="add_phrase_title">Create card</string>
-    <string name="add_phrase_enter_phrase">Enter phrase</string>
+    <string name="add_phrase_title">Створити картку</string>
+    <string name="add_phrase_enter_phrase">Введіть словосполучення</string>
     <!--endregion-->
 
     <!--Create card -->
-    <string name="create_card_phrase_label">Phrase</string>
-    <string name="create_card_phrase_placeholder">Enter phrase</string>
-    <string name="create_card_definition_label">Definition</string>
-    <string name="create_card_definition_placeholder">Enter definition</string>
-    <string name="create_card_add_example">Add example</string>
-    <string name="create_card_example_placeholder">Enter example</string>
-    <string name="create_card_translation_label">Translation</string>
-    <string name="create_card_translation_placeholder">Enter translation</string>
-    <string name="create_card_collection_label">Collection</string>
-    <string name="create_card_save">Save</string>
+    <string name="create_card_phrase_label">Фраза / слово</string>
+    <string name="create_card_phrase_placeholder">Введіть фразу / слово</string>
+    <string name="create_card_definition_label">Визначення</string>
+    <string name="create_card_definition_placeholder">Введіть визначення</string>
+    <string name="create_card_add_example">Додати приклад</string>
+    <string name="create_card_example_placeholder">Введіть приклад</string>
+    <string name="create_card_translation_label">Переклад</string>
+    <string name="create_card_translation_placeholder">Введіть переклад</string>
+    <string name="create_card_collection_label">Колекція</string>
+    <string name="create_card_save">Зберегти</string>
+    <string name="create_card_example_n">Приклад %s</string>
 
-    <string name="no_results">No results</string>
+    <string name="no_results">Немає результатів</string>
     <!--endregion-->
 
     <!--Notification -->
@@ -80,11 +80,6 @@
     <string name="description_notification_reminder">notification_description</string>
     <string name="reminders_notification_channel_id">notification_channel_id</string>
     <string name="reminders_notification_channel_name">notification_channel_name</string>
-    <!--endregion-->
-
-    <!--Game cards -->
-    <string name="game_cards_know">Know</string>
-    <string name="game_cards_dont_know">Know</string>
     <!--endregion-->
 
     <!--Groups page -->

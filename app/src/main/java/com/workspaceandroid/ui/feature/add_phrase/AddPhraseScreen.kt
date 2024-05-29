@@ -176,7 +176,7 @@ fun AddPhraseScreen(
                     repeat(textFieldCount) { times ->
                         TextInput(
                             modifier = Modifier.padding(top = offset_12),
-                            label = "Example #${times + 1}",
+                            label = stringResource(R.string.create_card_example_n, times + 1),
                             placeholderText = stringResource(id = R.string.create_card_example_placeholder),
                             onInputChanged = { exampleText ->
                                 phraseBuilder {

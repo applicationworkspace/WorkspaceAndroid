@@ -388,7 +388,7 @@ fun OverviewSection(
     phrasesCount: Int,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        Text(text = stringResource(R.string.collection_overview), fontWeight = FontWeight.Bold)
+        Text(modifier = Modifier.padding(top = offset_12), text = stringResource(R.string.collection_overview), fontWeight = FontWeight.Bold)
         Row(Modifier.padding(top = offset_16)) {
             Card(
                 modifier = Modifier.weight(1f),
@@ -448,7 +448,7 @@ fun UserPacksContainer(
         ) {
             Text(
                 modifier = Modifier.align(Alignment.TopStart),
-                text = stringResource(R.string.collection_my_packs),
+                text = stringResource(R.string.collection_my_groups),
                 fontWeight = FontWeight.Bold
             )
             Text(

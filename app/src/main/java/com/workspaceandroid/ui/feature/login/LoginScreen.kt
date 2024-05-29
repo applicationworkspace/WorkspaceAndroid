@@ -68,7 +68,9 @@ fun LoginScreen(
                 )
             )
         },
-        onSignUpClick = { viewModel.setEvent(Event.OnSignUpButtonClicked) }
+        onSignUpClick = {
+            viewModel.setEvent(Event.OnSignUpButtonClicked)
+        }
     )
 
     LaunchedEffect(Unit) {
@@ -214,6 +216,7 @@ fun LoginScreen(
                         end.linkTo(parent.end)
                     },
                 fullText = stringResource(R.string.auth_dont_have_an_account)
+                    .plus(" ")
                     .plus(stringResource(R.string.auth_register_now)),
                 hyperLinks = mutableMapOf(stringResource(R.string.auth_register_now) to ""),
                 textStyle = TextStyle(

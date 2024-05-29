@@ -21,7 +21,6 @@ class CollectionContract {
     data class State(
         val allGroupsWithPhrases: List<GroupUIModel> = emptyList(),
         val selectedPhrases: List<PhraseModel> = emptyList(),
-//        val phrases: List<Phrase> = emptyList(),
         val isLoading: Boolean = false
     ) : ViewState
 

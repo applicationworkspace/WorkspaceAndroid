@@ -212,8 +212,8 @@ fun SignUpScreen(
                 HyperlinkText(
                     fullText = stringResource(id = R.string.auth_terms_conditions),
                     hyperLinks = mutableMapOf(
-                        "terms" to "https://google.com",
-                        "conditions" to "https://google.com"
+                        "умовами" to "https://google.com",
+                        "положеннями" to "https://google.com"
                     ),
                     linkTextColor = MaterialTheme.colorScheme.primary
                 )
@@ -253,7 +253,7 @@ fun SignUpScreen(
                 )
                 Text(
                     modifier = Modifier.padding(start = offset_8, end = offset_8),
-                    text = stringResource(id = R.string.or).uppercase()
+                    text = stringResource(id = R.string.label_or).uppercase()
                 )
                 Divider(
                     modifier = Modifier.weight(1f),

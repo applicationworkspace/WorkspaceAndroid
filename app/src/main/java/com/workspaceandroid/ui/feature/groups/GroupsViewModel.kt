@@ -16,16 +16,16 @@ class GroupsViewModel @Inject constructor(
 ) : BaseViewModel<GroupsContract.Event, GroupsContract.State, GroupsContract.Effect>() {
 
     private var groupColors: List<Pair<String, Boolean>> = listOf(
-        "#ffb5c0d0" to true,
-        "#ffccd3ca" to false,
-        "#fff5e8dd" to false,
-        "#ffeed3d9" to false,
-        "#ffb7cf93" to false,
-        "#ff93cfa8" to false,
-        "#ff93cfcf" to false,
-        "#ff93a7cf" to false,
-        "#ffcf93b2" to false,
-        "#ffcf939a" to false
+        "#ffD1FADF" to true,
+        "#ffFEDF89" to false,
+        "#ffFDDCAB" to false,
+        "#ffFDA29B" to false,
+        "#ffFECDD6" to false,
+        "#ffBDB4FE" to false,
+        "#ffA4BCFD" to false,
+        "#ffB2DDFF" to false,
+        "#ffD5D9EB" to false,
+        "#ff98A2B3" to false
     )
 
     override fun setInitialState(): GroupsContract.State =
@@ -74,6 +74,6 @@ class GroupsViewModel @Inject constructor(
     }
 
     companion object {
-        private const val DEFAULT_COLOR = "ffb7cf93"
+        private const val DEFAULT_COLOR = "ffD1FADF"
     }
 }
