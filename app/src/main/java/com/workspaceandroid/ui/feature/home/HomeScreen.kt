@@ -242,7 +242,7 @@ fun FlipCard(phrase: PhraseModel) {
             ) {
 
                 Text(text =
-                if (rotated) "${phrase.translation} \n${phrase.examples.firstOrNull().orEmpty()}" else phrase.text,
+                if (rotated) "${phrase.translation}\n${phrase.definition}\n${phrase.examples.firstOrNull().orEmpty()}" else phrase.text,
                     modifier = Modifier
                         .graphicsLayer {
                             alpha = if (rotated) animateBack else animateFront

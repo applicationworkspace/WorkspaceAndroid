@@ -105,7 +105,7 @@ fun LoginScreen(
     onSignUpClick: () -> Unit,
 ) {
 
-    val inputValueEmail = rememberSaveable { mutableStateOf("sasha@gmail.com") }
+    val inputValueEmail = rememberSaveable { mutableStateOf("nadiia@gmail.com") }
     val inputValuePassword = rememberSaveable { mutableStateOf("12345678") }
     var isEmailError by rememberSaveable { mutableStateOf(false) }
     var isPasswordError by rememberSaveable { mutableStateOf(false) }

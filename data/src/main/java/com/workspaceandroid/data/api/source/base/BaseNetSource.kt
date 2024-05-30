@@ -1,6 +1,5 @@
 package com.workspaceandroid.data.api.source.base
 
-import android.util.Log
 import com.workspaceandroid.data.api.ApiException
 import com.workspaceandroid.data.api.RefreshTokenService
 import retrofit2.HttpException
